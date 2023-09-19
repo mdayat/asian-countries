@@ -1,7 +1,7 @@
 {
-  "name": "kumpulan-doa",
+  "name": "asian-countries",
   "author": "Muhammad Nur Hidayat",
-  "description": "Do'ain is an app that shows a list of do'a in Islam, especially daily do'a.",
+  "description": "A list of asian countries",
   "version": "1.0.0",
   "private": true,
   "license": "ISC",
