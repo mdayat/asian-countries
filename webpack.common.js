@@ -1,8 +1,6 @@
+import HtmlWebpackPlugin from "html-webpack-plugin";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
-
-import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
-import HtmlWebpackPlugin from "html-webpack-plugin";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const config = {
@@ -40,7 +38,6 @@ const config = {
     ],
   },
   plugins: [
-    new ForkTsCheckerWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: "./src/index.html",
       filename: "index.html",
