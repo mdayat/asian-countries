@@ -1,10 +1,11 @@
 import "./styles/reset.css";
 import "./main.css";
 
-import { getAsianCountries } from "./utils/country";
+import { getAsianCountries, searchAsianCountries } from "./utils/country";
+import { debounce } from "./utils/debounce";
 import type { Country } from "./types/country";
 
-function renderCountries(countries: Country[], err: string) {
+function renderAsianCountries(countries: Country[], err: string) {
   if (err !== "") {
     const errMsgEl = document.createElement("h2");
     errMsgEl.textContent = err;
@@ -15,4 +16,14 @@ function renderCountries(countries: Country[], err: string) {
   console.log(countries);
 }
 
-getAsianCountries(renderCountries);
+getAsianCountries(renderAsianCountries);
+const inputEl = document.getElementById("search") as HTMLInputElement;
+
+const debouncingSearch = debounce<string>((searchKeywords) => {
+  searchAsianCountries(searchKeywords, renderAsianCountries);
+}, 1000);
+
+inputEl.addEventListener("input", (event) => {
+  const searchKeywords = (event.target as HTMLInputElement).value;
+  debouncingSearch(searchKeywords);
+});

@@ -1,16 +1,7 @@
 import type { Country, CountryResponse, Currency } from "../types/country";
+import { API_ENDPOINT, queryFields } from "./apiUrl";
 
-const API_ENDPOINT = "https://restcountries.com/v3.1/";
-const dataFields = [
-  "name",
-  "cca3",
-  "idd",
-  "capital",
-  "currencies",
-  "languages",
-  "flags",
-  "subregion",
-];
+type Callback = (callback: Country[], err: string) => void;
 
 function generateCurrency(currencies: {
   [key: string]: { name: string };
@@ -31,10 +22,8 @@ function generateCurrency(currencies: {
   return generatedCurrency;
 }
 
-function getAsianCountries(
-  callback: (value: Country[], err: string) => void
-): void {
-  fetch(`${API_ENDPOINT}name/indonesia/?fields=${dataFields.join(",")}`, {
+function getAsianCountries(callback: Callback): void {
+  fetch(`${API_ENDPOINT}region/asia/?fields=${queryFields.join(",")}`, {
     method: "GET",
   })
     .then((res) => res.json())
@@ -43,7 +32,7 @@ function getAsianCountries(
       let err = "";
 
       if (!Array.isArray(data)) {
-        err = "Country not found!";
+        err = data.message;
         callback(countries, err);
         return;
       }
@@ -72,4 +61,52 @@ function getAsianCountries(
     });
 }
 
-export { getAsianCountries };
+function searchAsianCountries(searchKeywords: string, callback: Callback) {
+  fetch(`${API_ENDPOINT}region/asia/?fields=${queryFields.join(",")}`, {
+    method: "GET",
+  })
+    .then((res) => res.json())
+    .then((data: CountryResponse[] | { status: number; message: string }) => {
+      const searchedCountries: Country[] = [];
+      let err = "";
+
+      if (!Array.isArray(data)) {
+        err = data.message;
+        callback(searchedCountries, err);
+        return;
+      }
+
+      for (let i = 0; i < data.length; i++) {
+        const country = data[i] as CountryResponse;
+
+        if (country.name.official.toLowerCase().includes(searchKeywords)) {
+          const refinedData: Country = {
+            name: country.name.official,
+            ISOCode: country.cca3,
+            diallingCodes: country.idd.suffixes.map(
+              (suffix) => `${country.idd.root}${suffix}`
+            ),
+            capital: country.capital,
+            currencies: generateCurrency(country.currencies),
+            languages: Object.values(country.languages),
+            flag: { url: country.flags.png, alt: country.flags.alt },
+            subregion: country.subregion,
+          };
+
+          searchedCountries.push(refinedData);
+        }
+      }
+
+      if (searchedCountries.length === 0) {
+        err = `There is no country with the name of "${searchKeywords}"`;
+        callback(searchedCountries, err);
+      } else {
+        callback(searchedCountries, err);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+export { getAsianCountries, searchAsianCountries };
