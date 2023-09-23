@@ -17,12 +17,12 @@ function renderAsianCountries(countries: Country[], err: string) {
 }
 
 getAsianCountries(renderAsianCountries);
-const inputEl = document.getElementById("search") as HTMLInputElement;
 
 const debouncingSearch = debounce<string>((searchKeywords) => {
   searchAsianCountries(searchKeywords, renderAsianCountries);
 }, 1000);
 
+const inputEl = document.getElementById("search") as HTMLInputElement;
 inputEl.addEventListener("input", (event) => {
   const searchKeywords = (event.target as HTMLInputElement).value;
   debouncingSearch(searchKeywords);

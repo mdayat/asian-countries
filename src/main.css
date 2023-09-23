@@ -1,7 +1,95 @@
+/* General */
 :root {
   --font-family: "Source Sans 3", sans-serif;
 }
-
 body {
   font-family: var(--font-family);
+}
+
+/* Header */
+header {
+}
+
+/* Main */
+main {
+  margin: 52px 32px;
+}
+
+article {
+  margin-bottom: 32px;
+}
+article + img {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto;
+}
+h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+h1 + p {
+  line-height: normal;
+}
+h1 + p > a {
+  color: black;
+  font-weight: 600;
+}
+
+/* Foooter */
+footer > p {
+  line-height: normal;
+  text-align: center;
+}
+footer > p > a {
+  color: black;
+  font-weight: 600;
+}
+
+@media only screen and (min-width: 768px) {
+  main {
+    margin-left: 48px;
+    margin-right: 48px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  main {
+    margin-left: 64px;
+    margin-right: 64px;
+  }
+
+  .asia-desc {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    place-items: center;
+  }
+  article {
+    margin-bottom: 0;
+  }
+  article + img {
+    margin: 0;
+  }
+  h1 {
+    font-size: 36px;
+  }
+  h1 + p {
+    font-size: 18px;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  main {
+    margin-left: 80px;
+    margin-right: 80px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  main {
+    margin-left: 96px;
+    margin-right: 96px;
+  }
 }
