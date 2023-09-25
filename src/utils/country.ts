@@ -22,8 +22,23 @@ function generateCurrency(currencies: {
   return generatedCurrency;
 }
 
+function generateCountry(country: CountryResponse): Country {
+  return {
+    name: country.name.official,
+    ISOCode: country.cca3,
+    diallingCodes: country.idd.suffixes.map(
+      (suffix) => `${country.idd.root}${suffix}`
+    ),
+    capital: country.capital,
+    currencies: generateCurrency(country.currencies),
+    languages: Object.values(country.languages),
+    flag: { url: country.flags.png, alt: country.flags.alt },
+    subregion: country.subregion,
+  };
+}
+
 function getAsianCountries(callback: Callback): void {
-  fetch(`${API_ENDPOINT}name/indonesia/?fields=${queryFields.join(",")}`, {
+  fetch(`${API_ENDPOINT}region/asia/?fields=${queryFields.join(",")}`, {
     method: "GET",
   })
     .then((res) => res.json())
@@ -38,20 +53,7 @@ function getAsianCountries(callback: Callback): void {
       }
 
       for (const country of data) {
-        const refinedData: Country = {
-          name: country.name.official,
-          ISOCode: country.cca3,
-          diallingCodes: country.idd.suffixes.map(
-            (suffix) => `${country.idd.root}${suffix}`
-          ),
-          capital: country.capital,
-          currencies: generateCurrency(country.currencies),
-          languages: Object.values(country.languages),
-          flag: { url: country.flags.png, alt: country.flags.alt },
-          subregion: country.subregion,
-        };
-
-        countries.push(refinedData);
+        countries.push(generateCountry(country));
       }
 
       callback(countries, err);
@@ -78,22 +80,8 @@ function searchAsianCountries(searchKeywords: string, callback: Callback) {
 
       for (let i = 0; i < data.length; i++) {
         const country = data[i] as CountryResponse;
-
         if (country.name.official.toLowerCase().includes(searchKeywords)) {
-          const refinedData: Country = {
-            name: country.name.official,
-            ISOCode: country.cca3,
-            diallingCodes: country.idd.suffixes.map(
-              (suffix) => `${country.idd.root}${suffix}`
-            ),
-            capital: country.capital,
-            currencies: generateCurrency(country.currencies),
-            languages: Object.values(country.languages),
-            flag: { url: country.flags.png, alt: country.flags.alt },
-            subregion: country.subregion,
-          };
-
-          searchedCountries.push(refinedData);
+          searchedCountries.push(generateCountry(country));
         }
       }
 
