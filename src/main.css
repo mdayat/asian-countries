@@ -2,6 +2,7 @@
 :root {
   --font-family: "Source Sans 3", sans-serif;
   --blue: #2563eb;
+  --gray: #f2f2f2;
 }
 body {
   font-family: var(--font-family);
@@ -9,6 +10,16 @@ body {
 
 /* Header */
 header {
+  background-color: var(--blue);
+  height: 55px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 0 32px;
+}
+header > img {
+  width: 36px;
+  height: 36px;
 }
 
 /* Main */
@@ -55,7 +66,7 @@ h1 + p > a {
   fill: var(--blue);
 }
 input[type="text"] {
-  background-color: #f2f2f2;
+  background-color: var(--gray);
   border: 2px solid var(--blue);
   font-family: var(--font-family);
   font-size: 16px;
@@ -71,24 +82,70 @@ input[type="text"]::placeholder {
   font-weight: 500;
 }
 
+.countries-container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  place-items: center;
+  gap: 16px;
+  margin-top: 32px;
+}
+.country-card {
+  background-color: var(--gray);
+  border-radius: 8px;
+  padding: 16px;
+}
+.country-card > img {
+  width: 100%;
+  border-radius: 8px;
+  border: 2px solid black;
+}
+.country-card > div {
+  margin-top: 16px;
+}
+.country-card > div > h3 {
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+.country-card > div > p {
+  display: flex;
+  justify-content: space-between;
+}
+
 /* Foooter */
 footer > p {
   line-height: normal;
   text-align: center;
+  background-color: var(--blue);
+  color: white;
+  padding: 16px 0;
 }
 footer > p > a {
-  color: black;
+  color: white;
   font-weight: 600;
 }
 
 @media only screen and (min-width: 768px) {
+  header {
+    padding: 0 48px;
+  }
+
   main {
     margin-left: 48px;
     margin-right: 48px;
   }
+
+  .countries-container {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
 }
 
 @media only screen and (min-width: 1024px) {
+  header {
+    padding: 0 64px;
+  }
+
   main {
     margin-left: 64px;
     margin-right: 64px;
@@ -123,16 +180,35 @@ footer > p > a {
     width: 230px;
     padding: 3.5px 14px;
   }
+
+  .countries-container {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 @media only screen and (min-width: 1280px) {
+  header {
+    padding: 0 80px;
+  }
+
   main {
     margin-left: 80px;
     margin-right: 80px;
   }
+
+  .country-card > div > h3 {
+    font-size: 20px;
+  }
+  .country-card > div > p {
+    font-size: 18px;
+  }
 }
 
 @media only screen and (min-width: 1440px) {
+  header {
+    padding: 0 96px;
+  }
+
   main {
     margin-left: 96px;
     margin-right: 96px;
