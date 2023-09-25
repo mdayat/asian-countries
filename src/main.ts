@@ -3,6 +3,7 @@ import "./main.css";
 
 import { getAsianCountries, searchAsianCountries } from "./utils/country";
 import { debounce } from "./utils/debounce";
+
 import type { Country } from "./types/country";
 
 function renderAsianCountries(countries: Country[], err: string) {

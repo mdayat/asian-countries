@@ -1,6 +1,7 @@
 /* General */
 :root {
   --font-family: "Source Sans 3", sans-serif;
+  --blue: #2563eb;
 }
 body {
   font-family: var(--font-family);
@@ -36,6 +37,38 @@ h1 + p {
 h1 + p > a {
   color: black;
   font-weight: 600;
+}
+
+.search {
+  margin-top: 52px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 0 8px;
+}
+.search > label {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+.search > label > svg {
+  fill: var(--blue);
+}
+input[type="text"] {
+  background-color: #f2f2f2;
+  border: 2px solid var(--blue);
+  font-family: var(--font-family);
+  font-size: 16px;
+  border-radius: 12px;
+  width: 200px;
+  padding: 2px 12px;
+  box-sizing: border-box;
+}
+input[type="text"]:focus {
+  outline: none;
+}
+input[type="text"]::placeholder {
+  font-weight: 500;
 }
 
 /* Foooter */
@@ -77,6 +110,18 @@ footer > p > a {
   }
   h1 + p {
     font-size: 18px;
+  }
+
+  .search {
+    gap: 0 16px;
+  }
+  .search > label {
+    width: 28px;
+    height: 28px;
+  }
+  input[type="text"] {
+    width: 230px;
+    padding: 3.5px 14px;
   }
 }
 

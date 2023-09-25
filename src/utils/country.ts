@@ -23,7 +23,7 @@ function generateCurrency(currencies: {
 }
 
 function getAsianCountries(callback: Callback): void {
-  fetch(`${API_ENDPOINT}region/asia/?fields=${queryFields.join(",")}`, {
+  fetch(`${API_ENDPOINT}name/indonesia/?fields=${queryFields.join(",")}`, {
     method: "GET",
   })
     .then((res) => res.json())
