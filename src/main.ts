@@ -20,9 +20,14 @@ function renderAsianCountries(countries: Country[], err: string) {
   }
 
   if (err !== "") {
-    const errMsgEl = document.createElement("h2");
+    const errContainerEl = document.createElement("p");
+    errContainerEl.setAttribute("class", "error-message");
+    errContainerEl.textContent = "Uh Oh!";
+
+    const errMsgEl = document.createElement("span");
     errMsgEl.textContent = err;
-    countriesContainerEl.appendChild(errMsgEl);
+    errContainerEl.appendChild(errMsgEl);
+    countriesContainerEl.appendChild(errContainerEl);
     return;
   }
 
