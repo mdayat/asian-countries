@@ -1,4 +1,18 @@
+import "./CountryDetails";
+
 import type { Country } from "../types/country";
+import type { CountryDetails } from "./CountryDetails";
+
+function openCountryDetails(event: Event) {
+  const countryCardEl = (event.target as HTMLButtonElement)
+    .parentElement as CountryCard;
+  const countryDetailsEl = document.createElement(
+    "country-details"
+  ) as CountryDetails;
+  countryDetailsEl.country = countryCardEl._country;
+  countryDetailsEl.setAttribute("scrollY", String(window.scrollY));
+  countryCardEl.appendChild(countryDetailsEl);
+}
 
 class CountryCard extends HTMLElement {
   _country: Country = {
@@ -17,9 +31,15 @@ class CountryCard extends HTMLElement {
     this.render();
   }
 
-  connectedCallback() {}
+  connectedCallback() {
+    const btnDetailsEl = this.lastElementChild as HTMLButtonElement;
+    btnDetailsEl.addEventListener("click", openCountryDetails);
+  }
 
-  disconnectedCallback() {}
+  disconnectedCallback() {
+    const btnDetailsEl = this.lastElementChild as HTMLButtonElement;
+    btnDetailsEl.removeEventListener("click", openCountryDetails);
+  }
 
   render() {
     this.setAttribute("class", "country-card");
