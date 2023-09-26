@@ -10,22 +10,15 @@
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack serve --config webpack.dev.js",
-    "check-types": "pnpm exec tsc",
     "check-lint": "pnpm eslint ."
   },
   "devDependencies": {
-    "@types/node": "^20.6.0",
-    "@typescript-eslint/eslint-plugin": "^6.7.0",
-    "@typescript-eslint/parser": "^6.7.0",
     "css-loader": "^6.8.1",
     "eslint": "^8.49.0",
-    "fork-ts-checker-webpack-plugin": "^8.0.0",
     "html-loader": "^4.2.0",
     "html-webpack-plugin": "^5.5.3",
     "husky": "^8.0.3",
     "style-loader": "^3.3.3",
-    "ts-loader": "^9.4.4",
-    "typescript": "^5.2.2",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1",

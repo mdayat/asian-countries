@@ -1,21 +1,15 @@
-import "./CountryDetails";
+import "./CountryDetails.js";
 
-import type { Country } from "../types/country";
-import type { CountryDetails } from "./CountryDetails";
-
-function openCountryDetails(event: Event) {
-  const countryCardEl = (event.target as HTMLButtonElement)
-    .parentElement as CountryCard;
-  const countryDetailsEl = document.createElement(
-    "country-details"
-  ) as CountryDetails;
+function openCountryDetails(event) {
+  const countryCardEl = event.target.parentElement;
+  const countryDetailsEl = document.createElement("country-details");
   countryDetailsEl.country = countryCardEl._country;
   countryDetailsEl.setAttribute("scrollY", String(window.scrollY));
   countryCardEl.appendChild(countryDetailsEl);
 }
 
 class CountryCard extends HTMLElement {
-  _country: Country = {
+  _country = {
     name: "",
     ISOCode: "",
     diallingCodes: [],
@@ -26,18 +20,18 @@ class CountryCard extends HTMLElement {
     flag: { url: "", alt: "" },
   };
 
-  set country(country: Country) {
+  set country(country) {
     this._country = country;
     this.render();
   }
 
   connectedCallback() {
-    const btnDetailsEl = this.lastElementChild as HTMLButtonElement;
+    const btnDetailsEl = this.lastElementChild;
     btnDetailsEl.addEventListener("click", openCountryDetails);
   }
 
   disconnectedCallback() {
-    const btnDetailsEl = this.lastElementChild as HTMLButtonElement;
+    const btnDetailsEl = this.lastElementChild;
     btnDetailsEl.removeEventListener("click", openCountryDetails);
   }
 
@@ -64,7 +58,7 @@ class CountryCard extends HTMLElement {
     pEl.appendChild(subregionSpanEl);
 
     const iddSpanEl = document.createElement("span");
-    iddSpanEl.textContent = this._country.diallingCodes[0] as string;
+    iddSpanEl.textContent = this._country.diallingCodes[0];
     pEl.appendChild(iddSpanEl);
 
     const buttonEl = document.createElement("button");
