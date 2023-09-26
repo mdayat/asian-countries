@@ -1,5 +1,5 @@
 ## What
-This is an app that shows a list of Asian countries. You can search for a specific country by its name. Additionally, you can filter countries based on the Asia subregion.
+This is an app that shows a list of Asian countries. You can search for a specific country by its name.
 
 ## Tech Stack
 It's a pain in the ass to set up this project from scratch. It should be an easy thing to set up a Node.js project frankly, but it becomes hard because the [Node.js](https://nodejs.org/en) ecosystem is not yet fully supported for ESM. So, here is the tech stack I used in this project:
