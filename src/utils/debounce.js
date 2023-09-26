@@ -1,4 +1,4 @@
-function debounce(callback, ms) {
+const debounce = (callback, ms) => {
   let timeout = setTimeout(() => {}, 0);
   return (params) => {
     clearTimeout(timeout);
@@ -6,6 +6,6 @@ function debounce(callback, ms) {
       callback(params);
     }, ms);
   };
-}
+};
 
 export { debounce };

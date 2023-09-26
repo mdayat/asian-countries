@@ -1,9 +1,9 @@
-function closeCountryDetails(event) {
+const closeCountryDetails = (event) => {
   const countryDetailsEl = event.target.parentElement?.parentElement;
   window.onscroll = () => {};
   window.scrollTo(0, countryDetailsEl.scrollY);
   countryDetailsEl.remove();
-}
+};
 
 class CountryDetails extends HTMLElement {
   scrollY = 0;

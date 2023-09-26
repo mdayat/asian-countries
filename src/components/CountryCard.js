@@ -1,12 +1,12 @@
 import "./CountryDetails.js";
 
-function openCountryDetails(event) {
+const openCountryDetails = (event) => {
   const countryCardEl = event.target.parentElement;
   const countryDetailsEl = document.createElement("country-details");
   countryDetailsEl.country = countryCardEl._country;
   countryDetailsEl.setAttribute("scrollY", String(window.scrollY));
   countryCardEl.appendChild(countryDetailsEl);
-}
+};
 
 class CountryCard extends HTMLElement {
   _country = {

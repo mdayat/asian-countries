@@ -1,6 +1,21 @@
 import { API_ENDPOINT, queryFields } from "./apiUrl.js";
 
-function generateCurrency(currencies) {
+const generateCountry = (country) => {
+  return {
+    name: country.name.official,
+    ISOCode: country.cca3,
+    diallingCodes: country.idd.suffixes.map(
+      (suffix) => `${country.idd.root}${suffix}`
+    ),
+    capital: country.capital,
+    currencies: generateCurrency(country.currencies),
+    languages: Object.values(country.languages),
+    flag: { url: country.flags.png, alt: country.flags.alt },
+    subregion: country.subregion,
+  };
+};
+
+const generateCurrency = (currencies) => {
   const generatedCurrency = [];
   const currencyKeys = Object.keys(currencies);
 
@@ -15,24 +30,9 @@ function generateCurrency(currencies) {
   }
 
   return generatedCurrency;
-}
+};
 
-function generateCountry(country) {
-  return {
-    name: country.name.official,
-    ISOCode: country.cca3,
-    diallingCodes: country.idd.suffixes.map(
-      (suffix) => `${country.idd.root}${suffix}`
-    ),
-    capital: country.capital,
-    currencies: generateCurrency(country.currencies),
-    languages: Object.values(country.languages),
-    flag: { url: country.flags.png, alt: country.flags.alt },
-    subregion: country.subregion,
-  };
-}
-
-function getAsianCountries(callback) {
+const getAsianCountries = (callback) => {
   fetch(`${API_ENDPOINT}region/asia/?fields=${queryFields.join(",")}`, {
     method: "GET",
   })
@@ -56,9 +56,9 @@ function getAsianCountries(callback) {
     .catch((err) => {
       console.log(err);
     });
-}
+};
 
-function searchAsianCountries(searchKeywords, callback) {
+const searchAsianCountries = (searchKeywords, callback) => {
   fetch(`${API_ENDPOINT}region/asia/?fields=${queryFields.join(",")}`, {
     method: "GET",
   })
@@ -90,6 +90,6 @@ function searchAsianCountries(searchKeywords, callback) {
     .catch((err) => {
       console.log(err);
     });
-}
+};
 
 export { getAsianCountries, searchAsianCountries };

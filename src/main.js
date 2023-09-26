@@ -5,7 +5,7 @@ import "./main.css";
 import { getAsianCountries, searchAsianCountries } from "./utils/country.js";
 import { debounce } from "./utils/debounce.js";
 
-function renderAsianCountries(countries, err) {
+const renderAsianCountries = (countries, err) => {
   const countriesContainerEl = document.getElementsByClassName(
     "countries-container"
   )[0];
@@ -34,7 +34,7 @@ function renderAsianCountries(countries, err) {
     countryCard.country = country;
     countriesContainerEl.appendChild(countryCard);
   }
-}
+};
 
 getAsianCountries(renderAsianCountries);
 
