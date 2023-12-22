@@ -1,17 +1,12 @@
-import type { Country, CountryResponse, Currency } from "../types/country";
-import { API_ENDPOINT, queryFields } from "./apiUrl";
+import { API_ENDPOINT, queryFields } from "./apiUrl.js";
 
-type Callback = (callback: Country[], err: string) => void;
-
-function generateCurrency(currencies: {
-  [key: string]: { name: string };
-}): Currency[] {
-  const generatedCurrency: Currency[] = [];
+function generateCurrency(currencies) {
+  const generatedCurrency = [];
   const currencyKeys = Object.keys(currencies);
 
   for (let i = 0; i < currencyKeys.length; i++) {
-    const code = currencyKeys[0] as string;
-    const name = currencies[`${currencyKeys[i]}`]?.name as string;
+    const code = currencyKeys[0];
+    const name = currencies[`${currencyKeys[i]}`]?.name;
 
     generatedCurrency.push({
       code,
@@ -22,12 +17,12 @@ function generateCurrency(currencies: {
   return generatedCurrency;
 }
 
-function generateCountry(country: CountryResponse): Country {
+function generateCountry(country) {
   return {
     name: country.name.official,
     ISOCode: country.cca3,
     diallingCodes: country.idd.suffixes.map(
-      (suffix) => `${country.idd.root}${suffix}`
+      (suffix) => `${country.idd.root}${suffix}`,
     ),
     capital: country.capital,
     currencies: generateCurrency(country.currencies),
@@ -37,13 +32,13 @@ function generateCountry(country: CountryResponse): Country {
   };
 }
 
-function getAsianCountries(callback: Callback): void {
+function getAsianCountries(callback) {
   fetch(`${API_ENDPOINT}region/asia/?fields=${queryFields.join(",")}`, {
     method: "GET",
   })
     .then((res) => res.json())
-    .then((data: CountryResponse[] | { status: number; message: string }) => {
-      const countries: Country[] = [];
+    .then((data) => {
+      const countries = [];
       let err = "";
 
       if (!Array.isArray(data)) {
@@ -63,13 +58,13 @@ function getAsianCountries(callback: Callback): void {
     });
 }
 
-function searchAsianCountries(searchKeywords: string, callback: Callback) {
+function searchAsianCountries(searchKeywords, callback) {
   fetch(`${API_ENDPOINT}region/asia/?fields=${queryFields.join(",")}`, {
     method: "GET",
   })
     .then((res) => res.json())
-    .then((data: CountryResponse[] | { status: number; message: string }) => {
-      const searchedCountries: Country[] = [];
+    .then((data) => {
+      const searchedCountries = [];
       let err = "";
 
       if (!Array.isArray(data)) {
@@ -79,7 +74,7 @@ function searchAsianCountries(searchKeywords: string, callback: Callback) {
       }
 
       for (let i = 0; i < data.length; i++) {
-        const country = data[i] as CountryResponse;
+        const country = data[i];
         if (country.name.official.toLowerCase().includes(searchKeywords)) {
           searchedCountries.push(generateCountry(country));
         }

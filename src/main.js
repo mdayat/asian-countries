@@ -1,16 +1,14 @@
-import "./components/CountryCard";
+import "./components/CountryCard.js";
 import "./styles/reset.css";
 import "./main.css";
 
-import { getAsianCountries, searchAsianCountries } from "./utils/country";
-import { debounce } from "./utils/debounce";
-import type { Country } from "./types/country";
-import type { CountryCard } from "./components/CountryCard";
+import { getAsianCountries, searchAsianCountries } from "./utils/country.js";
+import { debounce } from "./utils/debounce.js";
 
-function renderAsianCountries(countries: Country[], err: string) {
+function renderAsianCountries(countries, err) {
   const countriesContainerEl = document.getElementsByClassName(
-    "countries-container"
-  )[0] as HTMLUListElement;
+    "countries-container",
+  )[0];
   const amountOfChildEl = countriesContainerEl.childElementCount;
 
   if (amountOfChildEl !== 0) {
@@ -32,7 +30,7 @@ function renderAsianCountries(countries: Country[], err: string) {
   }
 
   for (const country of countries) {
-    const countryCard = document.createElement("country-card") as CountryCard;
+    const countryCard = document.createElement("country-card");
     countryCard.country = country;
     countriesContainerEl.appendChild(countryCard);
   }
@@ -40,12 +38,12 @@ function renderAsianCountries(countries: Country[], err: string) {
 
 getAsianCountries(renderAsianCountries);
 
-const debouncingSearch = debounce<string>((searchKeywords) => {
+const debouncingSearch = debounce((searchKeywords) => {
   searchAsianCountries(searchKeywords, renderAsianCountries);
 }, 750);
 
-const inputEl = document.getElementById("search") as HTMLInputElement;
+const inputEl = document.getElementById("search");
 inputEl.addEventListener("input", (event) => {
-  const searchKeywords = (event.target as HTMLInputElement).value;
+  const searchKeywords = event.target.value;
   debouncingSearch(searchKeywords);
 });

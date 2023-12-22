@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-pnpm check-lint
-pnpm check-types
+echo "Checking Code Lint"
+pnpm check-lint || {
+  echo "Code Lint Check Failed"
+  false
+}

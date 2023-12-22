@@ -5,7 +5,7 @@ import { fileURLToPath } from "url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const config = {
   context: __dirname,
-  entry: "./src/main.ts",
+  entry: "./src/main.js",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "main.js",
@@ -13,16 +13,6 @@ const config = {
   },
   module: {
     rules: [
-      {
-        test: /\.tsx?$/,
-        use: [
-          {
-            loader: "ts-loader",
-            options: { transpileOnly: true },
-          },
-        ],
-        exclude: /node_modules/,
-      },
       {
         test: /\.css$/i,
         use: ["style-loader", "css-loader"],
@@ -44,7 +34,7 @@ const config = {
     }),
   ],
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: [".js"],
   },
 };
 

@@ -1,16 +1,13 @@
-import type { Country } from "../types/country";
-
-function closeCountryDetails(event: Event) {
-  const countryDetailsEl = (event.target as HTMLButtonElement).parentElement
-    ?.parentElement as CountryDetails;
+function closeCountryDetails(event) {
+  const countryDetailsEl = event.target.parentElement?.parentElement;
   window.onscroll = () => {};
   window.scrollTo(0, countryDetailsEl.scrollY);
   countryDetailsEl.remove();
 }
 
 class CountryDetails extends HTMLElement {
-  scrollY: number = 0;
-  _country: Country = {
+  scrollY = 0;
+  _country = {
     name: "",
     ISOCode: "",
     diallingCodes: [],
@@ -21,7 +18,7 @@ class CountryDetails extends HTMLElement {
     flag: { url: "", alt: "" },
   };
 
-  set country(country: Country) {
+  set country(country) {
     this._country = country;
     this.render();
   }
@@ -33,14 +30,12 @@ class CountryDetails extends HTMLElement {
       window.scrollTo(0, 0);
     };
 
-    const btnCloseEl = this.firstElementChild
-      ?.lastElementChild as HTMLButtonElement;
+    const btnCloseEl = this.firstElementChild?.lastElementChild;
     btnCloseEl.addEventListener("click", closeCountryDetails);
   }
 
   disconnectedCallback() {
-    const btnCloseEl = this.firstElementChild
-      ?.lastElementChild as HTMLButtonElement;
+    const btnCloseEl = this.firstElementChild?.lastElementChild;
     btnCloseEl.removeEventListener("click", closeCountryDetails);
   }
 
