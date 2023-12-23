@@ -1,18 +1,7 @@
-## What
-This is an app that shows a list of Asian countries. You can search for a specific country by its name.
+A fairly simple website application for displaying data by utilizing [Public APIs](https://github.com/public-apis/public-apis) to fulfill [Dicoding Submission](https://www.dicoding.com/academies/163/) with the following criteria:
+1. Using [ES6](https://www.w3schools.com/js/js_es6.asp) syntax
+2. Implement custom elements using [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components)
+3. Using [Webpack](https://webpack.js.org/) as a bundler and development environment
+4. Using [AJAX](https://www.w3schools.com/whatis/whatis_ajax.asp) concept to display dynamic data.
 
-## Tech Stack
-It's a pain in the ass to set up this project from scratch. It should be an easy thing to set up a Node.js project frankly, but it becomes hard because the [Node.js](https://nodejs.org/en) ecosystem is not yet fully supported for ESM. So, here is the tech stack I used in this project:
-
-**Core Tech Stack**:
-1. [TypeScript](https://www.typescriptlang.org/)
-2. [Webpack](https://webpack.js.org/)
-
-**Helper Tools**:
-1. [ESLint](https://eslint.org/)
-2. [Husky](https://typicode.github.io/husky/getting-started.html)
-
-## More
-- This app is created to fulfill the [Dicoding Submission](https://www.dicoding.com/academies/163/).
-- You can check the API that i used in this project [here](https://restcountries.com/).
-- Check out for more [Public API](https://github.com/public-apis/public-apis).
+This application will display a list of countries on the Asian continent. You can find the country you are looking for by entering search keywords.
